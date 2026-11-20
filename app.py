@@ -4,16 +4,16 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from dotenv import load_dotenv
 from werkzeug.exceptions import HTTPException
 
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / '.env')
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=None)
 app.config['MAX_CONTENT_LENGTH'] = 12 * 1024 * 1024
-DB = BASE_DIR / 'career_match.db'
+DB = Path('/tmp/career_match.db') if os.getenv('VERCEL') else BASE_DIR / 'career_match.db'
 
 MODEL = os.getenv('GEMINI_MODEL', 'gemini-3.8-flash').strip()
 FALLBACK_MODELS = [m.strip() for m in os.getenv('GEMINI_FALLBACK_MODELS', 'gemini-2.5-flash,gemini-2.0-flash').split(',') if m.strip()]
@@ -467,11 +467,21 @@ def analyze(resume, jd, role, company, save=True):
 
 
 # --------------------------------------------------------------------------- errors / assets
+@app.route('/css/<path:filename>')
+def local_css(filename):
+    return send_from_directory(BASE_DIR / 'public' / 'css', filename)
+
+
+@app.route('/js/<path:filename>')
+def local_js(filename):
+    return send_from_directory(BASE_DIR / 'public' / 'js', filename)
+
+
 @app.context_processor
 def asset_version():
     def v(path):
         try:
-            return int((BASE_DIR / 'static' / path).stat().st_mtime)
+            return int((BASE_DIR / 'public' / path).stat().st_mtime)
         except OSError:
             return 0
     return {'asset_v': v}

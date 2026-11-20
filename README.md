@@ -72,6 +72,7 @@ Python, Flask, SQLite, Google GenAI SDK, Gemini text generation, Gemini embeddin
 - Resume contents are processed locally by Flask and sent to Google Gemini only if a Gemini API key is configured and AI features are invoked. Avoid uploading sensitive personal data you do not wish to process.
 - Gemini model availability and quotas depend on your Google AI Studio account. You can change the model name in `.env` if needed.
 - Uploaded files are processed in memory; the app stores analysis text/payloads in SQLite history. Delete saved history using Settings or the clear-history action.
+- On Vercel, SQLite is placed in `/tmp` because function filesystems are read-only outside that scratch directory. `/tmp` is temporary, so saved analysis/chat history is not durable across function instances or deployments; use a hosted database for persistent production history.
 
 
 ## Field-specific matching improvements
