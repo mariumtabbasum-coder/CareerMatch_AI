@@ -1,0 +1,16 @@
+Sample Resume — Alex Developer
+
+PROFILE
+Junior frontend developer with practical experience building responsive web interfaces and small web applications. Interested in clean UI, accessibility, and continued learning.
+
+SKILLS
+HTML5, CSS3, JavaScript, React, Bootstrap, Git, GitHub, REST API integration, Responsive Design, Figma, jQuery, SEO basics, UI/UX, debugging, problem solving.
+
+PROJECTS
+Portfolio Website: Responsive portfolio built with frontend technologies and a backend admin workflow. Includes projects, skills, contact information and ongoing updates.
+Weather App: React and TypeScript weather application consuming a weather API, with responsive interface and dynamic presentation.
+Restaurant Website: Multi-page responsive restaurant website using HTML, CSS, Bootstrap, jQuery and JavaScript. Includes form validation and interactive UI.
+AI Content Studio: Flask application integrating a generative AI API for content drafts in multiple formats and languages.
+
+EDUCATION
+Software Engineering Diploma — ongoing

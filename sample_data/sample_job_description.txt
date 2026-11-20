@@ -1,0 +1,19 @@
+Junior Frontend Developer
+
+We are looking for an entry-level frontend developer to build accessible, responsive web interfaces and work with the product/design team.
+
+Requirements:
+- HTML5, CSS3 and modern JavaScript
+- React fundamentals and TypeScript basics
+- Responsive design and accessibility awareness
+- Git and GitHub workflow
+- REST API integration
+- Familiarity with frontend testing fundamentals
+- Strong communication and problem-solving skills
+
+Responsibilities:
+- Implement reusable UI components
+- Collaborate with design and backend teams
+- Debug and improve web interface quality
+- Maintain clean, readable code
+- Participate in code review and learn best practices

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CareerMatch AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/lucide-static@0.468.0/font/lucide.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ asset_v('css/style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" data-page="dashboard" aria-label="CareerMatch AI home">
+        <span class="brand-mark"><i class="icon icon-sparkles"></i></span>
+        <span class="brand-name">career<span>match</span><small>AI CAREER INTELLIGENCE</small></span>
+      </a>
+      <div class="topbar-center"><span class="status-dot"></span> AI workspace <span class="topbar-divider"></span><span class="topbar-date">Career insights, made actionable</span></div>
+      <div class="top-actions">
+        <button class="icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications" aria-haspopup="true" aria-expanded="false"><i class="icon icon-bell"></i><span class="notification-dot" id="notifDot" hidden></span></button>
+        <button class="profile-chip" id="profileBtn" aria-label="Workspace menu" aria-haspopup="true" aria-expanded="false"><span class="avatar" id="avatarText">CM</span><span class="profile-name" id="workspaceName">My Workspace</span><i class="icon icon-chevron-down"></i></button>
+        <button id="menuToggle" class="icon-btn menu-toggle" aria-label="Open navigation menu" aria-expanded="false"><i class="icon icon-menu"></i></button>
+      </div>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-page="dashboard"><i class="icon icon-layout-dashboard"></i><span>Dashboard</span></button>
+        <button class="nav-item nav-primary" data-page="analysis"><i class="icon icon-scan-search"></i><span>New Analysis</span><span class="nav-plus">+</span></button>
+        <div class="nav-divider"></div>
+        <div class="workspace-label">CAREER TOOLS</div>
+        <button class="nav-item" data-page="results"><i class="icon icon-chart-no-axes-combined"></i><span>Match Results</span></button>
+        <button class="nav-item" data-page="chat"><i class="icon icon-message-circle"></i><span>Career AI Chat</span><span class="nav-tag">AI</span></button>
+        <button class="nav-item" data-page="roadmap"><i class="icon icon-route"></i><span>Learning Roadmap</span></button>
+        <button class="nav-item" data-page="history"><i class="icon icon-folder-clock"></i><span>Saved Analyses</span></button>
+        <div class="nav-divider"></div>
+        <div class="workspace-label">PREFERENCES</div>
+        <button class="nav-item" data-page="settings"><i class="icon icon-settings-2"></i><span>Settings</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="upgrade-card"><div class="upgrade-icon"><i class="icon icon-orbit"></i></div><strong>Your next role starts here.</strong><p>Turn your skills into a clear career strategy.</p><button data-page="analysis" class="upgrade-link">Start matching <i class="icon icon-arrow-up-right"></i></button></div>
+        <div class="sidebar-footer"><span class="footer-badge">BETA</span><span>CareerMatch AI <span class="version">v1.0</span></span></div>
+      </div>
+    </aside>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <main class="main-content" id="mainContent">
+      <!-- Dashboard -->
+      <section class="page-section active" id="page-dashboard">
+        <div class="page-heading">
+          <div><div class="eyebrow">THURSDAY, YOUR CAREER IS IN FOCUS</div><h1>Good to see you<span class="lime">.</span></h1><p class="page-subtitle">Know where you stand. Make your next move with confidence.</p></div>
+          <button class="btn-lime" data-page="analysis"><i class="icon icon-plus"></i> New job match</button>
+        </div>
+        <div class="hero-banner">
+          <div class="hero-content"><div class="hero-kicker"><span class="pill-lime">CAREER INTELLIGENCE</span><span>01 / YOUR NEXT MOVE</span></div><h2>Find the role that<br><em>fits your potential.</em></h2><p>Compare your resume with a job description. Discover strengths, gaps and your path forward — powered by AI.</p><button class="btn-lime btn-hero" data-page="analysis">Analyze a job <i class="icon icon-arrow-right"></i></button></div>
+          <div class="hero-visual"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="orbit-core"><i class="icon icon-crosshair"></i></div><div class="orbit-node node-a"><i class="icon icon-file-text"></i></div><div class="orbit-node node-b"><i class="icon icon-briefcase-business"></i></div><div class="orbit-node node-c"><i class="icon icon-sparkles"></i></div><div class="orbit-label">SKILLS <span>×</span> OPPORTUNITY</div></div>
+        </div>
+        <div class="section-heading"><div><h3>Your overview</h3><p>A snapshot of your job-matching activity</p></div><button class="period-select" id="periodBtn" aria-haspopup="true" aria-expanded="false"><span id="periodLabel">All time</span> <i class="icon icon-chevron-down"></i></button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Analyses completed</span><span class="stat-icon"><i class="icon icon-files"></i></span></div><div class="stat-number">0 <small class="trend">Saved reports</small></div><div class="stat-foot">Across different roles</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Average match score</span><span class="stat-icon lime-icon"><i class="icon icon-target"></i></span></div><div class="stat-number">0<span class="stat-percent">%</span></div><div class="stat-foot">Average saved match score</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Skills identified</span><span class="stat-icon"><i class="icon icon-layers-3"></i></span></div><div class="stat-number">0 <small class="trend">Unique skills</small></div><div class="stat-foot">Across your saved resumes</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Best match</span><span class="stat-icon"><i class="icon icon-trophy"></i></span></div><div class="stat-number">—</div><div class="stat-foot">Run an analysis to set your best match</div></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="panel trend-panel"><div class="panel-head"><div><h3>Match score trend</h3><p>Your compatibility across recent analyses</p></div><button class="text-button" id="trendBtn" aria-haspopup="true" aria-expanded="false"><span id="trendLabel">Last 6 matches</span> <i class="icon icon-chevron-down"></i></button></div><div class="chart-area"><div class="chart-y"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div><div class="chart-placeholder" id="trendChart"><div class="chart-grid"><span></span><span></span><span></span><span></span><span></span></div><div id="trendPlot"></div><div class="chart-x" id="trendX"></div><div class="chart-empty" id="trendEmpty">Run your first analysis to see your score trend.</div></div></div></article>
+          <article class="panel skills-panel"><div class="panel-head"><div><h3>Skill coverage</h3><p>Frequently requested skills</p></div><button class="dots-btn" id="skillsMenuBtn" aria-label="Skill coverage options" aria-haspopup="true" aria-expanded="false"><i class="icon icon-ellipsis"></i></button></div><div class="skill-coverage" id="skillCoverage"><p class="empty-note">No skill data yet. Analyze a job to see which requested skills your resume covers.</p></div><button class="panel-link" data-page="roadmap">View skill gaps <i class="icon icon-arrow-up-right"></i></button></article>
+        </div>
+        <div class="section-heading"><div><h3>Recent analyses</h3><p>Pick up where you left off</p></div><button class="text-button" data-page="history">View all <i class="icon icon-arrow-right"></i></button></div>
+        <div class="recent-table panel"><div class="recent-row recent-head"><span>ROLE / COMPANY</span><span>DATE</span><span>MATCH</span><span>STATUS</span><span></span></div><div class="empty-row">No analyses yet. Start your first match.</div></div>
+      </section>
+
+      <!-- Analysis -->
+      <section class="page-section" id="page-analysis">
+        <div class="page-heading"><div><div class="eyebrow">NEW MATCH · STEP 01</div><h1>Let's find your fit<span class="lime">.</span></h1><p class="page-subtitle">Add your resume and the role you're targeting to get an honest, actionable match report.</p></div><span class="step-chip"><span class="step-active">01</span> INPUT <span class="step-line"></span> <span>02</span> ANALYSIS <span class="step-line"></span> <span>03</span> RESULTS</span></div>
+        <div class="analysis-layout"><div class="analysis-main">
+          <article class="panel input-panel"><div class="input-panel-head"><span class="number-badge">01</span><div><h3>Your resume</h3><p>Upload your latest resume to identify your skills and experience.</p></div><span class="required">REQUIRED</span></div><div class="dropzone" id="resumeDrop"><input type="file" id="resumeFile" accept=".pdf,.docx,.txt" hidden><div class="drop-icon"><i class="icon icon-file-up"></i></div><strong>Drop your resume here</strong><span>or <button class="inline-link" id="resumeBrowse">browse files</button> to upload</span><small>PDF, DOCX or TXT · Up to 10 MB</small></div><div class="uploaded-file" id="resumeUploaded" hidden><span class="file-icon"><i class="icon icon-file-text"></i></span><div class="file-info"><strong id="resumeName"></strong><small id="resumeSize"></small></div><button class="remove-file" id="resumeRemove" aria-label="Remove resume"><i class="icon icon-x"></i></button></div><div class="or-divider"><span>OR</span></div><label class="field-label" for="resumeText">Paste resume text</label><textarea id="resumeText" class="text-input resume-text" placeholder="Paste your resume content here…"></textarea><div class="field-foot"><span>Include skills, experience and projects for a better analysis.</span><span id="resumeCount">0 characters</span></div></article>
+          <article class="panel input-panel"><div class="input-panel-head"><span class="number-badge">02</span><div><h3>Job description</h3><p>Paste the job requirements for the role you want.</p></div><span class="required">REQUIRED</span></div><label class="field-label" for="jobTitle">Job title <span class="optional">(optional)</span></label><input class="text-input" id="jobTitle" placeholder="e.g. Junior Frontend Developer"><label class="field-label mt-3" for="jobText">Job description</label><textarea id="jobText" class="text-input job-text" placeholder="Paste the job description, responsibilities, requirements and qualifications…"></textarea><div class="field-foot"><span>More detail helps us identify requirements accurately.</span><span id="jobCount">0 characters</span></div><div class="upload-jd"><input type="file" id="jobFile" accept=".pdf,.docx,.txt" hidden><button class="upload-small" id="jobBrowse"><i class="icon icon-paperclip"></i> Upload job file</button><span>PDF, DOCX, TXT</span><span class="file-inline" id="jobFileName"></span></div></article>
+          <div class="analysis-actions"><button class="btn-outline" id="sampleBtn"><i class="icon icon-flask-conical"></i> Try sample</button><button class="btn-lime btn-analyze" id="analyzeBtn"><i class="icon icon-sparkles"></i> Analyze match <i class="icon icon-arrow-right"></i></button></div>
+          <div class="analysis-progress" id="analysisProgress" hidden><div class="progress-steps"><span class="progress-step active"><i class="icon icon-file-search"></i> Reading documents</span><span class="progress-step"><i class="icon icon-brain"></i> Extracting skills</span><span class="progress-step"><i class="icon icon-git-compare"></i> Matching requirements</span><span class="progress-step"><i class="icon icon-sparkles"></i> Building insights</span></div><div class="progress-track big"><span id="progressBar"></span></div><p id="progressMessage">Preparing your analysis…</p></div>
+        </div><aside class="analysis-side"><article class="panel side-tip"><div class="tip-icon"><i class="icon icon-shield-check"></i></div><h3>Your data stays yours</h3><p>Resume information is sensitive. Files will be handled securely and temporary uploads cleared after processing. Backend privacy controls are added in upcoming phases.</p><div class="tip-line"></div><div class="tip-icon"><i class="icon icon-scan"></i></div><h3>What you'll get</h3><ul class="deliver-list"><li><i class="icon icon-check"></i> Compatibility score</li><li><i class="icon icon-check"></i> Matched & missing skills</li><li><i class="icon icon-check"></i> Resume improvement tips</li><li><i class="icon icon-check"></i> Personalized learning plan</li><li><i class="icon icon-check"></i> Interview prep questions</li></ul></article><article class="panel side-note"><span class="note-label">PRO TIP</span><p>Keep your resume tailored to the role. Include project details and measurable results where possible.</p></article></aside></div>
+      </section>
+
+      <!-- Results -->
+      <section class="page-section" id="page-results">
+        <div class="page-heading"><div><div class="eyebrow">CAREER INTELLIGENCE · REPORT</div><h1>Your match report<span class="lime">.</span></h1><p class="page-subtitle">An honest view of your strengths and the areas to build next.</p></div><button class="btn-outline" id="downloadReport" aria-haspopup="true" aria-expanded="false"><i class="icon icon-download"></i> Export report <i class="icon icon-chevron-down"></i></button></div>
+        <div class="empty-state panel" id="resultsEmpty"><div class="empty-icon"><i class="icon icon-chart-no-axes-combined"></i></div><h3>No report yet</h3><p>Run an analysis with your resume and a job description to see your match score, skill gaps and action plan here.</p><button class="btn-lime" data-page="analysis"><i class="icon icon-plus"></i> Start an analysis</button></div>
+        <div id="resultsContent" hidden>
+          <div class="results-hero panel"><div class="score-wrap"><div class="score-ring" id="scoreRing"><div class="score-inner"><strong id="resultScore">0</strong><span>% MATCH</span></div></div><span class="score-label" id="scoreLabel">—</span></div><div class="results-summary"><span class="pill-lime">MATCH OVERVIEW</span><h2 id="resultRole">—</h2><p id="resultCompany"></p><p class="summary-text" id="resultSummary"></p><div class="summary-tags" id="summaryTags"></div></div><div class="score-breakdown" id="scoreBreakdown"></div></div>
+          <div class="results-tabs" role="tablist"><button class="result-tab active" data-tab="overview">Overview</button><button class="result-tab" data-tab="skills">Skills match</button><button class="result-tab" data-tab="gaps">Skills gap</button><button class="result-tab" data-tab="insights">Resume insights</button><button class="result-tab" data-tab="recommendations">Recommendations</button><button class="result-tab" data-tab="interview">Interview prep</button></div>
+          <div class="result-tab-content active" id="tab-overview"><div class="results-grid"><article class="panel result-panel"><div class="panel-head"><div><h3>Skill alignment</h3><p>Requirements found in your resume</p></div><span class="legend"><i class="legend-dot lime-dot"></i>Matched <i class="legend-dot gray-dot"></i>Gap</span></div><div class="skill-list" id="ovSkills"></div><button class="panel-link" data-tab="skills">View all skill details <i class="icon icon-arrow-right"></i></button></article><article class="panel result-panel"><div class="panel-head"><div><h3>Strengths to highlight</h3><p>Areas where your profile aligns</p></div></div><div id="ovStrengths"></div></article></div></div>
+          <div class="result-tab-content" id="tab-skills"><article class="panel result-panel"><h3>Skills matched to this role</h3><p class="panel-sub">Skills extracted from your current analysis.</p><div class="skill-pills" id="skillPills"></div></article></div>
+          <div class="result-tab-content" id="tab-gaps"><div class="results-grid"><article class="panel result-panel"><h3>Skills to prioritize</h3><p class="panel-sub">Focus on these gaps before or alongside applying.</p><div id="gapList"></div></article><article class="panel result-panel"><h3>Additional skills detected</h3><p class="panel-sub">Skills in your resume that may still be useful.</p><div class="skill-pills" id="gapExtra"></div></article></div></div>
+          <div class="result-tab-content" id="tab-insights"><article class="panel result-panel" id="insightsPanel"></article></div>
+          <div class="result-tab-content" id="tab-recommendations"><article class="panel result-panel" id="recoPanel"></article></div>
+          <div class="result-tab-content" id="tab-interview"><article class="panel result-panel" id="interviewPanel"></article></div>
+        </div>
+      </section>
+
+      <!-- Chat -->
+      <section class="page-section" id="page-chat">
+        <div class="page-heading"><div><div class="eyebrow">CAREER COPILOT</div><h1>Ask Career AI<span class="lime">.</span></h1><p class="page-subtitle">Your analysis-aware career assistant — ask, explore and plan.</p></div><button class="btn-outline" id="newChat"><i class="icon icon-plus"></i> New chat</button></div>
+        <div class="chat-layout">
+          <aside class="chat-history panel" id="chatHistory" aria-label="Chat history">
+            <div class="chat-history-head"><strong>Chat history</strong><button class="icon-mini" id="chatHistoryClose" aria-label="Close history"><i class="icon icon-x"></i></button></div>
+            <button class="btn-lime chat-new-btn" id="newChat2"><i class="icon icon-plus"></i> New chat</button>
+            <div class="chat-list" id="chatList"><p class="empty-note">No conversations yet.</p></div>
+            <button class="chat-clear-all" id="chatClearAll" hidden><i class="icon icon-trash-2"></i> Delete all chats</button>
+          </aside>
+          <div class="chat-shell panel">
+            <div class="chat-header"><button class="icon-mini chat-history-toggle" id="chatHistoryToggle" aria-label="Show chat history"><i class="icon icon-history"></i></button><div class="assistant-avatar"><i class="icon icon-sparkles"></i></div><div class="chat-title-wrap"><strong id="chatTitle">New chat</strong><small id="chatStatus"><span class="status-dot"></span> Checking AI connection…</small></div><button class="dots-btn" id="chatMenuBtn" aria-label="Chat options" aria-haspopup="true" aria-expanded="false"><i class="icon icon-ellipsis"></i></button></div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <form class="chat-input-wrap" id="chatForm"><textarea id="chatInput" rows="1" placeholder="Ask CareerMatch anything…"></textarea><button class="chat-send" type="submit" id="chatSend" aria-label="Send message"><i class="icon icon-arrow-up"></i></button><div class="chat-input-note">Career AI can make mistakes. Review suggestions before using.</div></form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Roadmap -->
+      <section class="page-section" id="page-roadmap"><div class="page-heading"><div><div class="eyebrow">GROWTH PLAN</div><h1>Your learning roadmap<span class="lime">.</span></h1><p class="page-subtitle">Turn identified skill gaps into a structured learning plan.</p></div><div class="heading-actions"><button class="btn-outline" id="roadmapClear"><i class="icon icon-trash-2"></i> Clear roadmap</button><button class="btn-lime" id="roadmapGenerate"><i class="icon icon-sparkles"></i> <span>Generate roadmap</span></button></div></div><div class="roadmap-banner panel" id="roadmapBanner"><div><span class="pill-lime" id="roadmapPill">SAMPLE ROADMAP</span><h2 id="roadmapTitle">Build skills. Unlock opportunities.</h2><p id="roadmapSub">Prioritized based on gaps from your sample analysis.</p></div><div class="roadmap-duration"><strong id="roadmapDays">30</strong><span>DAY PLAN</span></div></div><div class="roadmap-grid" id="roadmapGrid"></div></section>
+
+      <!-- History -->
+      <section class="page-section" id="page-history"><div class="page-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h1>Saved analyses<span class="lime">.</span></h1><p class="page-subtitle">Your previous job comparisons, all in one place.</p></div><button class="btn-lime" data-page="analysis"><i class="icon icon-plus"></i> New analysis</button></div><div class="history-toolbar panel"><div class="search-field"><i class="icon icon-search"></i><input id="historySearch" placeholder="Search roles or companies" aria-label="Search analyses"></div><button class="filter-button" id="filterBtn" aria-haspopup="true" aria-expanded="false"><i class="icon icon-sliders-horizontal"></i> Filter <span class="filter-count" id="filterCount" hidden>0</span></button><span class="history-count">0 analyses</span></div><div class="history-list panel"><div class="empty-history">No saved analyses yet. Start your first match.</div></div></section>
+
+      <!-- Settings -->
+      <section class="page-section" id="page-settings"><div class="page-heading"><div><div class="eyebrow">PREFERENCES</div><h1>Settings<span class="lime">.</span></h1><p class="page-subtitle">Manage your workspace preferences.</p></div></div><div class="settings-grid"><article class="panel settings-panel"><h3>Workspace</h3><p>Personalize your CareerMatch workspace.</p><div class="settings-row"><div><strong>Workspace name</strong><small>Shown in your top navigation</small></div><input class="settings-input" id="workspaceInput" value="My Workspace" maxlength="24" aria-label="Workspace name"></div><div class="settings-row"><div><strong>Appearance</strong><small>Theme selected for this app</small></div><span class="theme-choice"><span class="theme-swatch"></span>Graphite Lime <i class="icon icon-check"></i></span></div><div class="settings-row"><div><strong>Notifications</strong><small>Analysis completion notifications</small></div><label class="toggle"><input type="checkbox" id="setNotif" checked><span></span></label></div></article><article class="panel settings-panel"><h3>AI connection</h3><p class="api-status">Checking Gemini connection…</p><div class="settings-row"><div><strong>Enable Gemini AI</strong><small>Set GEMINI_API_KEY in your local .env file, then restart Flask</small></div><span class="privacy-state">Server-side key</span></div><div class="settings-row"><div><strong>Embedding model</strong><small>Used for semantic relevance when API is configured</small></div><span>gemini-embedding-001</span></div><h3>Privacy & data</h3><p>Control the information stored in your workspace.</p><div class="settings-row"><div><strong>Saved analysis history</strong><small>Keep results for future reference</small></div><label class="toggle"><input type="checkbox" id="setSave" checked><span></span></label></div><div class="settings-row"><div><strong>Temporary document storage</strong><small>Files are intended to be cleared after analysis</small></div><span class="privacy-state">Temporary</span></div><button class="danger-button" id="clearHistoryBtn"><i class="icon icon-trash-2"></i> Clear saved history</button> <button class="danger-button" id="clearChatsBtn"><i class="icon icon-trash-2"></i> Clear chat history</button></article></div></section>
+
+      <footer class="app-footer"><span>CareerMatch AI <span class="footer-dot">·</span> Your next opportunity, clearer.</span><span>CAREERMATCH AI <span class="footer-dot">·</span> Career intelligence workspace</span></footer>
+    </main>
+  </div>
+  <div class="popover" id="popover" hidden></div>
+  <div class="modal-backdrop" id="modal" hidden><div class="app-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><h3 id="modalTitle"></h3><p id="modalText"></p><div id="modalBody"></div><div class="modal-actions"><button class="btn-outline" id="modalCancel">Cancel</button><button class="btn-lime" id="modalOk">OK</button></div></div></div>
+  <div class="toast-message" id="toastMessage"><i class="icon icon-check-circle"></i><span>Done</span></div>
+  <script src="{{ url_for('static', filename='js/app.js') }}?v={{ asset_v('js/app.js') }}"></script>
+</body>
+</html>
